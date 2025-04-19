@@ -1,0 +1,13 @@
+# requirements.txt for ShellStash
+# These are the Python packages required to run the ShellStash bookmark manager.
+
+pyperclip>=1.8.2        # For clipboard functionality
+cryptography>=41.0.0    # For secure bookmark encryption
+requests>=2.31.0        # For fetching webpage titles
+beautifulsoup4>=4.12.2  # For parsing HTML to extract titles
+
+# Note: tkinter is typically included with Python, so it's not listed here.
+# If your Python installation doesn't include tkinter, you may need to install it separately:
+# - On Debian/Ubuntu: sudo apt-get install python3-tk
+# - On Fedora: sudo dnf install python3-tkinter
+# - On Windows/macOS: Usually bundled with Python
