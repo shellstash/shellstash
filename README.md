@@ -67,7 +67,7 @@ Categories: Use [tree] to sort/rename categories or toggle visibility.
 
 Credentials: Select a bookmark, use [show] to view, [copy] to copy username/password.
 
-Move Bookmarks: Drag-and-drop or use [↑]/[↓] buttons. Toggle []/[] for cross-category movement.
+Move Bookmarks: Drag-and-drop or use [↑]/[↓] buttons. Toggle [🔒]/[🔓] for cross-category movement.
 
 Commands:
 
