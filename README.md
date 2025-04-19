@@ -81,9 +81,11 @@ Import: Load HTML bookmark files (e.g., from Chrome/Firefox).
 Export: Save as HTML (browser-compatible) and TXT (includes unencrypted credentials—use cautiously).
 
 Screenshots
-[Main Interface:](screenshots/shellstash_main.png) 
-[Tree View:](screenshots/shellstash_tree.png) 
-[Edit:](screenshots/shellstash_edit.png) 
+![Main Interface:](screenshots/shellstash_main.png) 
+
+![Tree View:](screenshots/shellstash_tree.png) 
+
+![Edit:](screenshots/shellstash_edit.png) 
 
 Security Notes
 Bookmarks are stored in bookmarks.json.enc, encrypted with your password.
