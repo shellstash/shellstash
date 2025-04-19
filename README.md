@@ -81,11 +81,12 @@ Import: Load HTML bookmark files (e.g., from Chrome/Firefox).
 Export: Save as HTML (browser-compatible) and TXT (includes unencrypted credentials—use cautiously).
 
 Screenshots
-![Main Interface:](screenshots/shellstash_main.png) 
 
+![Main Interface:](screenshots/shellstash_main.png) 
+![Edit:](screenshots/shellstash_edit.png)
 ![Tree View:](screenshots/shellstash_tree.png) 
 
-![Edit:](screenshots/shellstash_edit.png) 
+ 
 
 Security Notes
 Bookmarks are stored in bookmarks.json.enc, encrypted with your password.
@@ -95,6 +96,7 @@ The salt.bin file is required for decryption.
 TXT exports contain unencrypted passwords; handle with care.
 
 No password recovery is available due to encryption design.
+
 
 Contributing
 Contributions are welcome! Please follow these steps:
@@ -119,16 +121,15 @@ Improved drag-and-drop UX.
 
 High-contrast mode for accessibility.
 
+
 License
 This project is licensed under the MIT License. See the LICENSE file for details.
+
 
 Support
 If you find ShellStash useful, consider supporting its development:
 BTC Address: bc1qs8g0eju0gkwtzjhh43sxdwm8yf4anmk29spq2l
 
-Copy via the [help] command in the app.
-
-For issues or feature requests, open an Issue on GitHub.
 
 Troubleshooting
 Wrong Password: Double-check your password. If lost, delete bookmarks.json.enc and salt.bin to start fresh (loses data).
