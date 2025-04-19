@@ -26,7 +26,7 @@
 ### Steps
 1. Clone the repository:
    ```bash
-   git clone https://github.com/ShellStash/shellstash.git
+   git clone https://github.com/shellStash/shellstash.git
    cd shellstash
 
 Install dependencies:
