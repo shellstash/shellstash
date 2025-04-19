@@ -1,11 +1,3 @@
-
- _______ __           __ __ _______ __                __    
-|     __|  |--.-----.|  |  |     __|  |_.---.-.-----.|  |--.
-|__     |     |  -__||  |  |__     |   _|  _  |__ --||     |
-|_______|__|__|_____||__|__|_______|____|___._|_____||__|__|
-
-
-
 # ShellStash
 
 **ShellStash** is a hacker-themed, terminal-style bookmark manager built in Python. It allows you to securely store, organize, and manage bookmarks with URLs, titles, categories, usernames, and passwords. Bookmarks are encrypted using Fernet (symmetric encryption), and the app features a command-line interface, drag-and-drop sorting, and category management.
@@ -89,10 +81,9 @@ Import: Load HTML bookmark files (e.g., from Chrome/Firefox).
 Export: Save as HTML (browser-compatible) and TXT (includes unencrypted credentials—use cautiously).
 
 Screenshots
-
-Main Interface: (screenshots/shellstash_main.png)
-Tree View: (screenshots/shellstash_tree.png)
-Edit: (screenshots/shellstash_edit.png)
+[Main Interface:](screenshots/shellstash_main.png) 
+[Tree View:](screenshots/shellstash_tree.png) 
+[Edit:](screenshots/shellstash_edit.png) 
 
 Security Notes
 Bookmarks are stored in bookmarks.json.enc, encrypted with your password.
