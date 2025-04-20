@@ -36,6 +36,7 @@
    cd shellstash
 
 Install dependencies:
+bash
 pip install cryptography pyperclip beautifulsoup4 requests
 
 Or manually install:
