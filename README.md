@@ -40,9 +40,11 @@ bash
 pip install cryptography pyperclip beautifulsoup4 requests
 
 Or manually install:
+bash
 pip install cryptography requests beautifulsoup4 pyperclip
 
 Run the application:
+bash
 python shellstash.py
 
 ### Usage
@@ -104,13 +106,6 @@ Search: Type "example" to filter.
 Export: Click [export] to save as HTML and TXT.
 
 
-
-Screenshots
-
-![Main Interface:](screenshots/shellstash_main.png) 
-![Edit:](screenshots/shellstash_edit.png)
-![Tree View:](screenshots/shellstash_tree.png) 
-
 ### Configuration
 ## Files:
 bookmarks.json.enc: Encrypted bookmark data.
@@ -137,27 +132,39 @@ No password recovery is available due to encryption design.
 
 
 ### Contributing
-Contributions are welcome! Please follow these steps:
-Fork the repository.
+Contributions are welcome! To contribute:
+Fork the Repository:
+bash
+git clone https://github.com/shellstash/shellstash.git
 
-Create a feature branch (git checkout -b feature/your-feature).
+Create a Branch:
+bash
+git checkout -b feature/your-feature
 
-Commit changes (git commit -m "Add your feature").
+Make Changes:
+Follow PEP 8 for code style.
 
-Push to the branch (git push origin feature/your-feature).
+Add tests if possible (future test suite planned).
 
-Open a Pull Request.
+Update documentation for new features.
 
-## Ideas for Contributions
-Password recovery hint feature.
+Submit a Pull Request:
+Push your branch and create a PR with a clear description of changes.
 
-Encrypted TXT export option.
+Example PR title: Add bookmark tagging feature.
 
-Undo functionality for actions.
+## Ideas for Contributions:
+Add support for bookmark tags.
 
-Improved drag-and-drop UX.
+Implement a backup system for bookmark files.
 
-High-contrast mode for accessibility.
+Enhance search with regex or field-specific filters.
+
+Optimize performance for large bookmark lists.
+
+Add macOS/Linux-specific UI tweaks.
+
+
 
 
 ### License
@@ -179,5 +186,5 @@ Category Movement: If bookmarks won’t move between categories, toggle to [].
 
 Errors: Check the prompt for error messages or consult the [help] guide.
 
-Happy hacking! 
+## Happy hacking! 
 
