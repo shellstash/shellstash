@@ -17,6 +17,12 @@
 - **Shortcuts**: Ctrl+N (new), Ctrl+O (open), Ctrl+D (delete), Ctrl+E (edit), Ctrl+T (tree).
 - **Help System**: Detailed in-app guide with usage tips and troubleshooting.
 
+## Screenshots
+
+| Main Interface | New Bookmark | Tree Window |
+|----------------|--------------|-------------|
+| ![Main UI](screenshots/main_ui.png) | ![New Bookmark](screenshots/new_bookmark.png) | ![Tree Window](screenshots/tree_window.png) |
+
 ## Installation
 
 ### Prerequisites
@@ -30,55 +36,73 @@
    cd shellstash
 
 Install dependencies:
-bash
-
 pip install cryptography pyperclip beautifulsoup4 requests
 
-Run the application:
-bash
+Or manually install:
+pip install cryptography requests beautifulsoup4 pyperclip
 
+Run the application:
 python shellstash.py
 
-First Launch
-Set a password to encrypt your bookmarks (entered twice for confirmation).
+### Usage
+First Launch:
+Set a password to encrypt your bookmarks. Confirm it by entering it twice.
 
-Use this password to unlock bookmarks on subsequent launches.
+The password will be required on subsequent launches to decrypt the bookmark file.
 
-Note: There’s no password recovery; keep it safe!
+## Main Interface:
+Command Buttons: Use [new], [edit], [delete], etc., for bookmark operations.
 
-Usage
-Main Interface:
-Top: Command buttons ([new], [edit], etc.) and search bar.
+Search Bar: Type to filter bookmarks by title or URL.
 
-Middle: Credential display with [show]/[hide] toggle.
+Text Area: View bookmarks grouped by category. Click to select, drag to reorder.
 
-Center: Bookmark list, grouped by categories.
+Credential Display: View usernames/passwords (starred by default). Use [show] to reveal or [copy] to copy to clipboard.
 
-Bottom: Command prompt ($) for manual commands.
+Prompt: Enter commands (e.g., new, tree, help) at the $ prompt.
 
-Common Tasks:
-Add Bookmark: Click [new] or type new. Enter URL, title (optional), category, username, password.
+Navigation: Use [↑]/[↓] to move bookmarks, [🔒]/[🔓] to toggle category lock, [swap] to change color schemes.
 
-Edit/Delete: Select a bookmark, use [edit]/[delete] or type edit/delete.
+## Key Commands:
+new: Create a new bookmark (Ctrl+N).
 
-Search: Type in the search bar to filter by title/URL.
+edit: Edit the selected bookmark (Ctrl+E).
 
-Categories: Use [tree] to sort/rename categories or toggle visibility.
+delete: Delete the selected bookmark (Ctrl+D).
 
-Credentials: Select a bookmark, use [show] to view, [copy] to copy username/password.
+tree: Open the category tree window (Ctrl+T).
 
-Move Bookmarks: Drag-and-drop or use [↑]/[↓] buttons. Toggle [🔒]/[🔓] for cross-category movement.
+open: Open the selected bookmark in a browser (Ctrl+O).
 
-Commands:
+copy: Copy the selected bookmark’s URL.
 
-new, edit, delete, tree, open, copy, import, export, passwd, help, swap, exit
+import/export: Import from HTML or export to HTML/TXT.
 
-Type in the prompt or use buttons/shortcuts.
+passwd: Change the encryption password.
 
-Import/Export:
-Import: Load HTML bookmark files (e.g., from Chrome/Firefox).
+help: View detailed documentation.
 
-Export: Save as HTML (browser-compatible) and TXT (includes unencrypted credentials—use cautiously).
+swap: Toggle color schemes.
+
+exit: Save and close the app.
+
+## Category Management:
+Open the tree window ([tree] or Ctrl+T) to sort, rename, or filter categories.
+
+Toggle category visibility with checkbuttons.
+
+Use [🔒] to restrict bookmark movement within categories or [🔓] to allow cross-category moves.
+
+## Example:
+Add a bookmark: Click [new], enter https://example.com, leave title blank (fetches "Example Domain"), set category to "Test", add username/password.
+
+Reorder: Drag the bookmark or use [↑]/[↓].
+
+Search: Type "example" to filter.
+
+Export: Click [export] to save as HTML and TXT.
+
+
 
 Screenshots
 
@@ -86,9 +110,22 @@ Screenshots
 ![Edit:](screenshots/shellstash_edit.png)
 ![Tree View:](screenshots/shellstash_tree.png) 
 
- 
+### Configuration
+## Files:
+bookmarks.json.enc: Encrypted bookmark data.
 
-Security Notes
+salt.bin: Random salt for encryption.
+
+shellstash_config.json: Stores window size and position.
+
+## Customization:
+Edit color_schemes in shellstash.py to modify or add color schemes.
+
+Adjust window geometry in shellstash_config.json for default size/position.
+
+
+
+### Security Notes
 Bookmarks are stored in bookmarks.json.enc, encrypted with your password.
 
 The salt.bin file is required for decryption.
@@ -98,7 +135,7 @@ TXT exports contain unencrypted passwords; handle with care.
 No password recovery is available due to encryption design.
 
 
-Contributing
+### Contributing
 Contributions are welcome! Please follow these steps:
 Fork the repository.
 
@@ -110,7 +147,7 @@ Push to the branch (git push origin feature/your-feature).
 
 Open a Pull Request.
 
-Ideas for Contributions
+## Ideas for Contributions
 Password recovery hint feature.
 
 Encrypted TXT export option.
@@ -122,16 +159,17 @@ Improved drag-and-drop UX.
 High-contrast mode for accessibility.
 
 
-License
+### License
 This project is licensed under the MIT License. See the LICENSE file for details.
 
 
-Support
+### Support
 If you find ShellStash useful, consider supporting its development:
 BTC Address: bc1qs8g0eju0gkwtzjhh43sxdwm8yf4anmk29spq2l
+Copy the address in the app’s help window ([help]) or donate directly.
 
 
-Troubleshooting
+### Troubleshooting
 Wrong Password: Double-check your password. If lost, delete bookmarks.json.enc and salt.bin to start fresh (loses data).
 
 Import Issues: Ensure HTML files follow the Netscape bookmark format.
