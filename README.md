@@ -21,7 +21,7 @@
 
 | Main Interface | New Bookmark | Tree Window |
 |----------------|--------------|-------------|
-| ![Main UI](screenshots/main_ui.png) | ![New Bookmark](screenshots/new_bookmark.png) | ![Tree Window](screenshots/tree_window.png) |
+| ![Main UI](screenshots/shellstash_main.png) | ![New Bookmark](screenshots/shellstash_new.png) | ![Tree Window](screenshots/shellstash_tree.png) |
 
 ## Installation
 
