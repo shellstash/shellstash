@@ -106,22 +106,22 @@ Search: Type "example" to filter.
 Export: Click [export] to save as HTML and TXT.
 
 
-### Configuration
-## Files:
+## Configuration
+### Files:
 bookmarks.json.enc: Encrypted bookmark data.
 
 salt.bin: Random salt for encryption.
 
 shellstash_config.json: Stores window size and position.
 
-## Customization:
+### Customization:
 Edit color_schemes in shellstash.py to modify or add color schemes.
 
 Adjust window geometry in shellstash_config.json for default size/position.
 
 
 
-### Security Notes
+## Security Notes
 Bookmarks are stored in bookmarks.json.enc, encrypted with your password.
 
 The salt.bin file is required for decryption.
@@ -131,7 +131,7 @@ TXT exports contain unencrypted passwords; handle with care.
 No password recovery is available due to encryption design.
 
 
-### Contributing
+## Contributing
 Contributions are welcome! To contribute:
 Fork the Repository:
 bash
@@ -153,7 +153,7 @@ Push your branch and create a PR with a clear description of changes.
 
 Example PR title: Add bookmark tagging feature.
 
-## Ideas for Contributions:
+### Ideas for Contributions:
 Add support for bookmark tags.
 
 Implement a backup system for bookmark files.
@@ -167,17 +167,17 @@ Add macOS/Linux-specific UI tweaks.
 
 
 
-### License
+## License
 This project is licensed under the MIT License. See the LICENSE file for details.
 
 
-### Support
+## Support
 If you find ShellStash useful, consider supporting its development:
 BTC Address: bc1qs8g0eju0gkwtzjhh43sxdwm8yf4anmk29spq2l
 Copy the address in the app’s help window ([help]) or donate directly.
 
 
-### Troubleshooting
+## Troubleshooting
 Wrong Password: Double-check your password. If lost, delete bookmarks.json.enc and salt.bin to start fresh (loses data).
 
 Import Issues: Ensure HTML files follow the Netscape bookmark format.
