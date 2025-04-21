@@ -36,7 +36,8 @@ Version: 1.0 - First Blood
    git clone https://github.com/shellStash/shellstash.git
    cd shellstash
 
-Run the application: ShellStash_V1.0_FirstBlood.py
+### Run the application:
+ShellStash_V1.0_FirstBlood.py
 
 ### Usage
 First Launch:
