@@ -1,5 +1,5 @@
 # ShellStash
-### Version: 1.0 - First Blood
+Version: 1.0 - First Blood
 
 **ShellStash** is a hacker-themed, terminal-style bookmark manager built in Python. It allows you to securely store, organize, and manage bookmarks with URLs, titles, categories, usernames, and passwords. Bookmarks are encrypted using Fernet (symmetric encryption), and the app features a command-line interface, drag-and-drop sorting, and category management.
 
