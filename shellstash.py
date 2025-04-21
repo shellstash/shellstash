@@ -17,7 +17,7 @@ import requests
 class BookmarkManager:
     def __init__(self, root):
         self.root = root
-        self.root.title("ShellStash")
+        self.root.title("ShellStash - 1337 Bookmark Hackz")
         self.config_file = "shellstash_config.json"
         
         self.load_window_geometry()
@@ -678,20 +678,55 @@ HACKING THE MAIN FRAME
                     self.show_prompt_message("Warning: URL cannot be empty!")
                     url_entry.focus_set()
                     return
-                # Remove old bookmark and append to the end of the new category
+
+                # Get the old category before removing the bookmark
+                old_category = self.bookmarks[actual_index].get('category', 'Uncategorized')
+
+                # Remove old bookmark
                 self.bookmarks.pop(actual_index)
+
+                # Update category_list if new_category is not present
+                if new_category not in self.category_list:
+                    # Insert new_category in alphabetical order or at the end
+                    insert_pos = 0
+                    for i, cat in enumerate(self.category_list):
+                        if cat > new_category:
+                            break
+                        insert_pos = i + 1
+                    self.category_list.insert(insert_pos, new_category)
+
+                # Check if old_category is still in use
+                if old_category not in [b.get('category', 'Uncategorized') for b in self.bookmarks]:
+                    if old_category in self.category_list:
+                        self.category_list.remove(old_category)
+                    if old_category in self.categories:
+                        del self.categories[old_category]
+                    if old_category in self.category_widgets:
+                        frame, _, _ = self.category_widgets.pop(old_category)
+                        frame.destroy()
+
+                # Insert updated bookmark in the correct position based on category_list
                 insert_index = 0
                 for i, bookmark in enumerate(self.bookmarks):
-                    if bookmark.get('category', 'Uncategorized') >= new_category:
-                        insert_index = i
+                    bookmark_cat = bookmark.get('category', 'Uncategorized')
+                    if self.category_list.index(bookmark_cat) > self.category_list.index(new_category):
                         break
-                    insert_index = i + 1
+                    if bookmark_cat == new_category:
+                        insert_index = i + 1
+                    else:
+                        insert_index = i
                 self.bookmarks.insert(insert_index, updated_bookmark)
-                self.save_bookmarks()
+
+                # Ensure new_category is in categories
                 if new_category not in self.categories:
                     self.categories[new_category] = tk.BooleanVar(value=True)
+
+                # Save and update UI
+                self.save_bookmarks()
                 self.update_category_buttons()
-                
+                self.update_textbox()
+
+                # Update selection in the text field
                 filtered_bookmarks = self.get_filtered_bookmarks()
                 line_to_bookmark = self.get_line_to_bookmark_mapping(filtered_bookmarks)
                 
@@ -705,6 +740,7 @@ HACKING THE MAIN FRAME
                 else:
                     self.textbox.tag_remove("selected", "1.0", tk.END)
                     self.show_prompt_message(f"Edited: {updated_bookmark['title']} (now hidden)")
+                
                 edit_window.destroy()
 
             url_entry.bind("<Return>", lambda e: title_entry.focus_set())
@@ -747,12 +783,12 @@ HACKING THE MAIN FRAME
                             font=("Consolas", 11), wrap=tk.WORD)
         help_text.pack(fill=tk.BOTH, expand=True, padx=10, pady=5)
         
-        help_content = """
-                                                                              
+        help_content = """                                                                            
     _______ __           __ __ _______ __                __    
 #  |     __|  |--.-----.|  |  |     __|  |_.---.-.-----.|  |--.
 #  |__     |     |  -__||  |  |__     |   _|  _  |__ --||     |
 #  |_______|__|__|_____||__|__|_______|____|___._|_____||__|__|
+#  Version: 1.0 - First Blood
 
 ---
 
@@ -1165,19 +1201,25 @@ Happy hacking!
             self.show_prompt_message("Warning: Category name cannot be empty!")
             return
         if new_name != old_name:
+            # Update category name in bookmarks
             for bookmark in self.bookmarks:
                 if bookmark.get('category', 'Uncategorized') == old_name:
                     bookmark['category'] = new_name
+            # Update categories dictionary
             if old_name in self.categories:
                 self.categories[new_name] = self.categories.pop(old_name)
+            # Update category_widgets dictionary
             if old_name in self.category_widgets:
                 frame, check, label = self.category_widgets.pop(old_name)
                 self.category_widgets[new_name] = (frame, check, label)
+            # Update selected category
             self.selected_category = new_name
+            # Update category_list to reflect new name, preserving order
             self.category_list = [new_name if cat == old_name else cat 
-                                  for cat in self.category_list]
-            self.bookmarks.sort(key=lambda b: (b.get('category', 'Uncategorized'), b['title']))  # Maintain sort
+                                 for cat in self.category_list]
+            # Save bookmarks without sorting
             self.save_bookmarks()
+            # Update UI
             self.update_category_tree()
             self.update_textbox()
             self.show_prompt_message(f"Renamed category: {old_name} -> {new_name}")
