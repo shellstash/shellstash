@@ -36,17 +36,7 @@ Version: 1.0 - First Blood
    git clone https://github.com/shellStash/shellstash.git
    cd shellstash
 
-Install dependencies:
-bash
-pip install cryptography pyperclip beautifulsoup4 requests
-
-Or manually install:
-bash
-pip install cryptography requests beautifulsoup4 pyperclip
-
-Run the application:
-bash
-python shellstash.py
+Run the application: ShellStash_V1.0_FirstBlood.py
 
 ### Usage
 First Launch:
