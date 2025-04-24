@@ -146,17 +146,12 @@ Push your branch and create a PR with a clear description of changes.
 Example PR title: Add bookmark tagging feature.
 
 ### Ideas for Contributions:
-Add support for bookmark tags.
 
 Implement a backup system for bookmark files.
 
-Enhance search with regex or field-specific filters.
-
 Optimize performance for large bookmark lists.
 
-Add macOS/Linux-specific UI tweaks.
-
-
+Creating a mobile app.
 
 
 ## License
