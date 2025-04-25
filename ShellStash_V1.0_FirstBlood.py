@@ -1,3 +1,6 @@
+# Copyright (c) 2025 shellstash
+# Lizenz: MIT
+
 import tkinter as tk
 from tkinter import filedialog, ttk
 import webbrowser
