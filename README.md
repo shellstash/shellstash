@@ -172,7 +172,7 @@ Wrong Password: Double-check your password. If lost, delete bookmarks.json.enc a
 
 Import Issues: Ensure HTML files follow the Netscape bookmark format.
 
-Category Movement: If bookmarks won’t move between categories, toggle to [🔒]/[🔓].
+Category Movement: If bookmarks won’t move between categories, toggle to [🔓].
 
 Errors: Check the prompt for error messages or consult the [help] guide.
 
