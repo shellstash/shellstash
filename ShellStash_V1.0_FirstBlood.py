@@ -1,6 +1,6 @@
 # Copyright (c) 2025 shellstash
-# Lizenz: MIT
-
+# This software is released under the MIT License.
+# See LICENSE file in the project root for full license information.
 import tkinter as tk
 from tkinter import filedialog, ttk
 import webbrowser
