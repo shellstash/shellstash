@@ -161,7 +161,9 @@ Copyright (c) 2025 ShellStash
 
 ## Support
 If you find ShellStash useful, consider supporting its development:
+
 BTC Address: bc1qs8g0eju0gkwtzjhh43sxdwm8yf4anmk29spq2l
+
 Copy the address in the app’s help window ([help]) or donate directly.
 
 
