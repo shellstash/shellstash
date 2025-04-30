@@ -538,7 +538,7 @@ HACKING THE MAIN FRAME
             if not title:
                 title = self.fetch_title(url)
                 title_entry.insert(0, title)
-            
+
             new_bookmark = {
                 'id': str(uuid.uuid4()),  # Add a unique identifier
                 'title': title,
@@ -547,10 +547,16 @@ HACKING THE MAIN FRAME
                 'username': username,
                 'password': password
             }
-            
-            # Append bookmark to the end of its category, respecting category_list order
+
+            # Ensure new category is added to category_list
             if category not in self.category_list:
                 self.category_list.append(category)
+
+            # Ensure new category is initialized in self.categories
+            if category not in self.categories:
+                self.categories[category] = tk.BooleanVar(value=True)
+
+            # Append bookmark to the end of its category, respecting category_list order
             insert_index = 0
             for i, bookmark in enumerate(self.bookmarks):
                 if bookmark.get('category', 'Uncategorized') == category:
@@ -563,7 +569,7 @@ HACKING THE MAIN FRAME
             self.bookmarks.insert(insert_index, new_bookmark)
             self.save_bookmarks()
             self.update_category_buttons()
-            
+
             self.update_textbox()
             filtered_bookmarks = self.get_filtered_bookmarks()
             if new_bookmark in filtered_bookmarks:
@@ -592,175 +598,122 @@ HACKING THE MAIN FRAME
         filtered_bookmarks = self.get_filtered_bookmarks()
         if index is not None and 0 <= index < len(filtered_bookmarks):
             bookmark = filtered_bookmarks[index]
-            actual_index = self.bookmarks.index(bookmark)
-            
+
             edit_window = tk.Toplevel(self.root)
             edit_window.title("Edit Bookmark - ShellStash")
             edit_window.geometry("480x370")
             edit_window.config(bg=self.color_schemes[self.current_scheme]["background"])
-            
-            tk.Label(edit_window, text="- url -", 
-                     bg=self.color_schemes[self.current_scheme]["background"], 
-                     fg=self.color_schemes[self.current_scheme]["primary_text"], 
+
+            tk.Label(edit_window, text="- url -",
+                     bg=self.color_schemes[self.current_scheme]["background"],
+                     fg=self.color_schemes[self.current_scheme]["primary_text"],
                      font=("Consolas", 11)).pack(pady=5)
-            url_entry = tk.Entry(edit_window, width=50, 
-                                 bg=self.color_schemes[self.current_scheme]["input_field"], 
-                                 fg=self.color_schemes[self.current_scheme]["primary_text"], 
-                                 insertbackground=self.color_schemes[self.current_scheme]["primary_text"], 
+            url_entry = tk.Entry(edit_window, width=50,
+                                 bg=self.color_schemes[self.current_scheme]["input_field"],
+                                 fg=self.color_schemes[self.current_scheme]["primary_text"],
+                                 insertbackground=self.color_schemes[self.current_scheme]["primary_text"],
                                  borderwidth=0, font=("Consolas", 11), justify="center")
             url_entry.pack(pady=5)
             url_entry.insert(0, bookmark['url'])
             url_entry.focus_set()
-            
-            tk.Label(edit_window, text="- title -", 
-                     bg=self.color_schemes[self.current_scheme]["background"], 
-                     fg=self.color_schemes[self.current_scheme]["secondary_text"], 
+
+            tk.Label(edit_window, text="- title -",
+                     bg=self.color_schemes[self.current_scheme]["background"],
+                     fg=self.color_schemes[self.current_scheme]["secondary_text"],
                      font=("Consolas", 11)).pack(pady=5)
-            title_entry = tk.Entry(edit_window, width=50, 
-                                   bg=self.color_schemes[self.current_scheme]["input_field"], 
-                                   fg=self.color_schemes[self.current_scheme]["secondary_text"], 
-                                   insertbackground=self.color_schemes[self.current_scheme]["secondary_text"], 
+            title_entry = tk.Entry(edit_window, width=50,
+                                   bg=self.color_schemes[self.current_scheme]["input_field"],
+                                   fg=self.color_schemes[self.current_scheme]["secondary_text"],
+                                   insertbackground=self.color_schemes[self.current_scheme]["secondary_text"],
                                    borderwidth=0, font=("Consolas", 11), justify="center")
             title_entry.pack(pady=5)
             title_entry.insert(0, bookmark['title'])
-            
-            tk.Label(edit_window, text="- category -", 
-                     bg=self.color_schemes[self.current_scheme]["background"], 
-                     fg=self.color_schemes[self.current_scheme]["category"], 
+
+            tk.Label(edit_window, text="- category -",
+                     bg=self.color_schemes[self.current_scheme]["background"],
+                     fg=self.color_schemes[self.current_scheme]["category"],
                      font=("Consolas", 11)).pack(pady=5)
-            category_entry = tk.Entry(edit_window, width=50, 
-                                      bg=self.color_schemes[self.current_scheme]["input_field"], 
-                                      fg=self.color_schemes[self.current_scheme]["category"], 
-                                      insertbackground=self.color_schemes[self.current_scheme]["category"], 
+            category_entry = tk.Entry(edit_window, width=50,
+                                      bg=self.color_schemes[self.current_scheme]["input_field"],
+                                      fg=self.color_schemes[self.current_scheme]["category"],
+                                      insertbackground=self.color_schemes[self.current_scheme]["category"],
                                       borderwidth=0, font=("Consolas", 11), justify="center")
             category_entry.pack(pady=5)
             category_entry.insert(0, bookmark.get('category', 'Uncategorized'))
-            
-            tk.Label(edit_window, text="- username -", 
-                     bg=self.color_schemes[self.current_scheme]["background"], 
-                     fg=self.color_schemes[self.current_scheme]["username"], 
+
+            tk.Label(edit_window, text="- username -",
+                     bg=self.color_schemes[self.current_scheme]["background"],
+                     fg=self.color_schemes[self.current_scheme]["username"],
                      font=("Consolas", 11)).pack(pady=5)
-            username_entry = tk.Entry(edit_window, width=50, 
-                                      bg=self.color_schemes[self.current_scheme]["input_field"], 
-                                      fg=self.color_schemes[self.current_scheme]["username"], 
-                                      insertbackground=self.color_schemes[self.current_scheme]["username"], 
+            username_entry = tk.Entry(edit_window, width=50,
+                                      bg=self.color_schemes[self.current_scheme]["input_field"],
+                                      fg=self.color_schemes[self.current_scheme]["username"],
+                                      insertbackground=self.color_schemes[self.current_scheme]["username"],
                                       borderwidth=0, font=("Consolas", 11), justify="center")
             username_entry.pack(pady=5)
             username_entry.insert(0, bookmark.get('username', ''))
-            
-            tk.Label(edit_window, text="- password -", 
-                     bg=self.color_schemes[self.current_scheme]["background"], 
-                     fg=self.color_schemes[self.current_scheme]["password"], 
+
+            tk.Label(edit_window, text="- password -",
+                     bg=self.color_schemes[self.current_scheme]["background"],
+                     fg=self.color_schemes[self.current_scheme]["password"],
                      font=("Consolas", 11)).pack(pady=5)
-            password_entry = tk.Entry(edit_window, width=50, 
-                                      bg=self.color_schemes[self.current_scheme]["input_field"], 
-                                      fg=self.color_schemes[self.current_scheme]["password"], 
-                                      insertbackground=self.color_schemes[self.current_scheme]["password"], 
+            password_entry = tk.Entry(edit_window, width=50,
+                                      bg=self.color_schemes[self.current_scheme]["input_field"],
+                                      fg=self.color_schemes[self.current_scheme]["password"],
+                                      insertbackground=self.color_schemes[self.current_scheme]["password"],
                                       borderwidth=0, font=("Consolas", 11), justify="center")
             password_entry.pack(pady=5)
             password_entry.insert(0, bookmark.get('password', ''))
-            
-            context_menu = tk.Menu(edit_window, tearoff=0)
-            context_menu.add_command(label="Paste", command=lambda: edit_window.focus_get().event_generate("<<Paste>>"))
 
-            def show_context_menu(event):
-                context_menu.post(event.x_root, event.y_root)
-
-            for entry in [title_entry, url_entry, category_entry, username_entry, password_entry]:
-                entry.bind("<Button-3>", show_context_menu)
-                entry.bind("<Control-v>", lambda e: entry.insert(tk.INSERT, pyperclip.paste()))
-            
-            def save_changes():
-                new_category = category_entry.get().strip() or 'Uncategorized'
-                updated_bookmark = {
-                    'id': bookmark['id'],  # Preserve the unique identifier
-                    'title': title_entry.get(),
-                    'url': url_entry.get(),
-                    'category': new_category,
-                    'username': username_entry.get(),
-                    'password': password_entry.get()
-                }
-                if not updated_bookmark['url']:
-                    self.show_prompt_message("Warning: URL cannot be empty!")
-                    url_entry.focus_set()
-                    return
-
-                # Get the old category before removing the bookmark
-                old_category = self.bookmarks[actual_index].get('category', 'Uncategorized')
-
-                # Remove old bookmark
-                self.bookmarks.pop(actual_index)
-
-                # Update category_list if new_category is not present
-                if new_category not in self.category_list:
-                    # Insert new_category in alphabetical order or at the end
-                    insert_pos = 0
-                    for i, cat in enumerate(self.category_list):
-                        if cat > new_category:
-                            break
-                        insert_pos = i + 1
-                    self.category_list.insert(insert_pos, new_category)
-
-                # Check if old_category is still in use
-                if old_category not in [b.get('category', 'Uncategorized') for b in self.bookmarks]:
-                    if old_category in self.category_list:
-                        self.category_list.remove(old_category)
-                    if old_category in self.categories:
-                        del self.categories[old_category]
-                    if old_category in self.category_widgets:
-                        frame, _, _ = self.category_widgets.pop(old_category)
-                        frame.destroy()
-
-                # Insert updated bookmark in the correct position based on category_list
-                insert_index = 0
-                for i, bookmark in enumerate(self.bookmarks):
-                    bookmark_cat = bookmark.get('category', 'Uncategorized')
-                    if self.category_list.index(bookmark_cat) > self.category_list.index(new_category):
-                        break
-                    if bookmark_cat == new_category:
-                        insert_index = i + 1
-                    else:
-                        insert_index = i
-                self.bookmarks.insert(insert_index, updated_bookmark)
-
-                # Ensure new_category is in categories
-                if new_category not in self.categories:
-                    self.categories[new_category] = tk.BooleanVar(value=True)
-
-                # Save and update UI
-                self.save_bookmarks()
-                self.update_category_buttons()
-                self.update_textbox()
-
-                # Update selection in the text field
-                filtered_bookmarks = self.get_filtered_bookmarks()
-                line_to_bookmark = self.get_line_to_bookmark_mapping(filtered_bookmarks)
-                
-                if updated_bookmark in filtered_bookmarks:
-                    new_index = filtered_bookmarks.index(updated_bookmark)
-                    new_line = [k for k, v in line_to_bookmark.items() if v == updated_bookmark['id']][0]
-                    self.textbox.tag_remove("selected", "1.0", tk.END)
-                    self.textbox.tag_add("selected", f"{new_line + 1}.0", f"{new_line + 2}.0")
-                    self.textbox.see(f"{new_line + 1}.0")
-                    self.show_prompt_message(f"Edited: {updated_bookmark['title']} ({updated_bookmark['url']})")
-                else:
-                    self.textbox.tag_remove("selected", "1.0", tk.END)
-                    self.show_prompt_message(f"Edited: {updated_bookmark['title']} (now hidden)")
-                
-                edit_window.destroy()
-
+            # Bind <Return> to move focus between fields and save changes
             url_entry.bind("<Return>", lambda e: title_entry.focus_set())
             title_entry.bind("<Return>", lambda e: category_entry.focus_set())
             category_entry.bind("<Return>", lambda e: username_entry.focus_set())
             username_entry.bind("<Return>", lambda e: password_entry.focus_set())
-            password_entry.bind("<Return>", lambda e: save_changes())
-            
-            tk.Label(edit_window, text="[PRESS ENTER TO SAVE]", 
-                     bg=self.color_schemes[self.current_scheme]["background"], 
-                     fg=self.color_schemes[self.current_scheme]["primary_text"], 
+            password_entry.bind("<Return>", lambda e: self.save_changes(
+                bookmark, url_entry, title_entry, category_entry, username_entry, password_entry, edit_window
+            ))
+
+            tk.Label(edit_window, text="[PRESS ENTER TO SAVE]",
+                     bg=self.color_schemes[self.current_scheme]["background"],
+                     fg=self.color_schemes[self.current_scheme]["primary_text"],
                      font=("Consolas", 11)).pack(pady=10)
         else:
             self.show_prompt_message("Warning: Please select a bookmark first!")
+
+    def save_changes(self, bookmark, url_entry, title_entry, category_entry, username_entry, password_entry, edit_window):
+        # Update the bookmark with new values
+        updated_bookmark = {
+            'id': bookmark['id'],  # Keep the same unique identifier
+            'title': title_entry.get().strip(),
+            'url': url_entry.get().strip(),
+            'category': category_entry.get().strip() or 'Uncategorized',
+            'username': username_entry.get().strip(),
+            'password': password_entry.get().strip()
+        }
+
+        # Validate the URL
+        if not updated_bookmark['url']:
+            self.show_prompt_message("Error: URL cannot be empty!")
+            url_entry.focus_set()
+            return
+
+        # Update the bookmark in the list
+        try:
+            actual_index = self.bookmarks.index(bookmark)
+            self.bookmarks[actual_index] = updated_bookmark
+        except ValueError:
+            self.show_prompt_message("Error: Bookmark not found in the list!")
+            return
+
+        # Save the updated bookmarks and refresh the UI
+        self.save_bookmarks()
+        self.update_category_buttons()
+        self.update_textbox()
+
+        # Close the edit window
+        edit_window.destroy()
+        self.show_prompt_message(f"Updated: {updated_bookmark['title']} ({updated_bookmark['url']})")
 
     def show_prompt_message(self, message, duration=2000):
         if hasattr(self, 'entry') and self.entry.winfo_exists():
@@ -1835,6 +1788,9 @@ Happy hacking!
                     encrypted_data = f.read()
                 decrypted_data = self.key.decrypt(encrypted_data)
                 self.bookmarks = json.loads(decrypted_data.decode('utf-8'))
+                self.category_list = list(OrderedDict((b.get('category', 'Uncategorized'), None) for b in self.bookmarks).keys())
+                self.sync_category_list()  # Ensure consistency
+                # Rebuild category_list based on loaded bookmarks
                 all_categories = OrderedDict()
                 for bookmark in self.bookmarks:
                     cat = bookmark.get('category', 'Uncategorized')
@@ -1842,18 +1798,34 @@ Happy hacking!
                         all_categories[cat] = 0
                     all_categories[cat] += 1
                 self.category_list = list(all_categories.keys())
+                
                 self.update_category_buttons()
             except Exception as e:
                 self.bookmarks = []
                 self.show_prompt_message(f"Error: Could not decrypt bookmarks. Wrong password or corrupted file. ({str(e)})")
         else:
             self.bookmarks = []
-
+            self.category_list = []
+    
     def save_bookmarks(self):
         json_data = json.dumps(self.bookmarks, ensure_ascii=False, indent=2).encode('utf-8')
         encrypted_data = self.key.encrypt(json_data)
         with open(self.bookmark_file, 'wb') as f:
             f.write(encrypted_data)
+        self.sync_category_list()  # Update categories
+
+    def sync_category_list(self):
+        categories = OrderedDict()
+        for bookmark in self.bookmarks:
+            cat = bookmark.get('category', 'Uncategorized')
+            categories[cat] = None
+        self.category_list = list(categories.keys())
+        # Remove stale categories from self.categories
+        for cat in list(self.categories.keys()):
+            if cat not in self.category_list:
+                del self.categories[cat]
+        # Update tree window
+        self.update_category_buttons()
 
     def on_closing(self):
         if self.key:
