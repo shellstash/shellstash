@@ -1,4 +1,4 @@
-# Copyright (c) 2025 shellstash
+# Copyright (c) 2025 ShellStash
 # This software is released under the MIT License.
 # See LICENSE file in the project root for full license information.
 import tkinter as tk
@@ -516,8 +516,9 @@ HACKING THE MAIN FRAME
         password_entry.pack(pady=5)
         
         context_menu = tk.Menu(new_window, tearoff=0)
+        context_menu.add_command(label="Copy", command=lambda: new_window.focus_get().event_generate("<<Copy>>"))
         context_menu.add_command(label="Paste", command=lambda: new_window.focus_get().event_generate("<<Paste>>"))
-
+     
         def show_context_menu(event):
             context_menu.post(event.x_root, event.y_root)
 
@@ -664,6 +665,18 @@ HACKING THE MAIN FRAME
                                       borderwidth=0, font=("Consolas", 11), justify="center")
             password_entry.pack(pady=5)
             password_entry.insert(0, bookmark.get('password', ''))
+            
+            # Add context menu for paste functionality
+            context_menu = tk.Menu(edit_window, tearoff=0)
+            context_menu.add_command(label="Copy", command=lambda: edit_window.focus_get().event_generate("<<Copy>>"))
+            context_menu.add_command(label="Paste", command=lambda: edit_window.focus_get().event_generate("<<Paste>>"))
+            def show_context_menu(event):
+                context_menu.post(event.x_root, event.y_root)
+
+            # Bind context menu and Ctrl+V to all entry fields
+            for entry in [url_entry, title_entry, category_entry, username_entry, password_entry]:
+                entry.bind("<Button-3>", show_context_menu)
+                entry.bind("<Control-v>", lambda e: entry.insert(tk.INSERT, pyperclip.paste()))
 
             # Bind <Return> to move focus between fields and save changes
             url_entry.bind("<Return>", lambda e: title_entry.focus_set())
